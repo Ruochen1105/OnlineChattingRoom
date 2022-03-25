@@ -40,15 +40,15 @@ An Example List with Embedded Logs:
 
 /login - page for login and registration
 
-![list create](documentation/login.png)
+![list create](/documentation/login.png)
 
 /home - page where everything happens
 
-![list](documentation/home.png)
+![list](/documentation/home.png)
 
 ## Site map
 
-* [site map](documentation/SiteMap.png)
+* [site map](/documentation/SiteMap.png)
 
 ## User Stories or Use Cases
 
