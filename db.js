@@ -21,11 +21,9 @@ const Server = new mongoose.Schema({
 	logs: [Log]
 });
 
-
 User.plugin(passportLocalMongoose);
-List.plugin(URLSlugs('name'));
 
 mongoose.model('User', User);
-mongoose.model('List', List);
-mongoose.model('Item', Item);
+mongoose.model('Log', Log);
+mongoose.model('Server', Server);
 mongoose.connect('mongodb://localhost/grocerydb');
