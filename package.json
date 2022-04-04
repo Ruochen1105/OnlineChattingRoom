@@ -21,7 +21,6 @@
     "node": "v16.13.2"
   },
   "devDependencies": {
-    "eslint": "^8.11.0",
     "eslint-plugin-mocha": "^10.0.3"
   },
   "dependencies": {

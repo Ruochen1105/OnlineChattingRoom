@@ -74,8 +74,8 @@ An Example List with Embedded Logs:
     * You'll have to link to testing code in repository
     * … and show a screen capture of tests
 
-* (3 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, but I won't make many pages, so I've assigned it 3 points
+* (3 points) React.js
+    * use React.js as the frontend framework; it's a challenging library to learn, but I won't make many pages, so I've assigned it 3 points
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
