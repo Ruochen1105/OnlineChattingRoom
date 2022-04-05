@@ -1,11 +1,33 @@
+require('./db.js');
+require('dotenv').config()
 const express = require("express");
+const cors = require('cors')
 const app = express();
 const path = require('path');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const crypto = require('crypto');
 
-const databaseURI = process.env.MONGODB_URI;
+app.use(cors());
+app.use(express.json());
+
+const log = mongoose.model('log', new mongoose.Schema({
+    content: String,
+    poster: String,
+    time: String
+}));
+
+app.post('/', (req, res) => {
+    const date = new Date();
+    const time = (date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds());
+    log.create({content: req.body.message, poster: crypto.randomUUID(), time: time});
+    res.json([{}]);
+})
 
 app.get('/', (req, res) => {
-    
+    log.find({}, (err, varToStoreResult, count) => {
+        res.json(varToStoreResult);
+    })
 })
 
 app.listen(process.env.PORT || 3000);
