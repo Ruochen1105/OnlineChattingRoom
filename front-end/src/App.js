@@ -36,9 +36,10 @@ function App() {
       <form onSubmit={e => e.preventDefault()}>
         <input type = 'text' value={msg} onChange={e => {setMSG(e.target.value)}}/>
         <input type = 'submit' value = 'Post' onClick={e => {
+          if (msg === '') {alert("You can't send nothing!")} else {
           fetch('http://localhost:8080/', {method: 'post', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({message: msg})})
           .then(res => {setMSG('')})
-          .catch((err)=>{console.log(err)})
+          .catch((err)=>{console.log(err)})}
         }}/>
       </form>
     </>
