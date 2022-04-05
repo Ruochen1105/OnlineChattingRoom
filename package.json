@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "echo \"plz start back-end and front-end from individual server\" && exit 1"
+    "start": "cd back-end && npm install && npm start",
+    "heroku-postbuild": "cd front-end && npm install && npm run build"
   },
   "repository": {
     "type": "git",

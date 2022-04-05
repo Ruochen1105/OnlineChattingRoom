@@ -10,6 +10,7 @@ const crypto = require('crypto');
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../front-end/build')));
 
 const log = mongoose.model('log', new mongoose.Schema({
     content: String,
@@ -28,6 +29,10 @@ app.get('/', (req, res) => {
     log.find({}, (err, varToStoreResult, count) => {
         res.json(varToStoreResult);
     })
+})
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../front-end/build/index.html'))
 })
 
 app.listen(process.env.PORT || 3000);
