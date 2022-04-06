@@ -32,7 +32,6 @@ app.get('/board', (req, res) => {
 })
 
 app.get('https://ruochen-ait-final.herokuapp.com/', (req, res) => {
-    log.create({content: __dirname});
     res.sendFile(path.join(__dirname, '..', '..', 'front-end', 'build', 'index.html'))
 })
 
