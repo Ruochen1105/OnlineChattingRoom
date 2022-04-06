@@ -32,6 +32,7 @@ app.get('/board', (req, res) => {
 })
 
 app.get('*', (req, res) => {
+    console.log(__dirname)
     res.sendFile(path.join(__dirname, '..', '..', 'front-end', 'build', 'index.html'))
 })
 
