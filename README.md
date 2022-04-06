@@ -6,10 +6,9 @@ This app allows its users to chat with others over the Internet in chatting room
 
 ## Data Model
 
-The application will store Users, Servers and Logs.
+The application will store Usersand Logs.
 
-* users can have multiple servers (via references)
-* each list can have multiple logs (by embedding)
+* users can have multiple logs (via references)
 
 An Example User:
 
@@ -17,19 +16,17 @@ An Example User:
 {
   username: "foo",
   hash: // a password hash,
-  servers: // an array of references to Server objects
+  posts: //an array of references to Logs objects
 }
 ```
 
-An Example List with Embedded Logs:
+An Example Log:
 
 ```javascript
 {
-  users: // an array of references to User objects
-  name: "server1",
-  logs: [
-    { poster: /*a reference to a User object*/, time: "2021-10-13T12:05:45Z", content: "foo!"},
-    { poster: /*a reference to a User object*/, time: "2021-10-13T12:06:54Z", content: "bar!"},
+  content: "foo",
+  poster: // a reference to User objects
+  time: "1111-11-11 11:11:11:111"
   ]
 }
 ```
@@ -54,13 +51,10 @@ An Example List with Embedded Logs:
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can join a chat room
-4. as a user, I can post messages in a chat room
-5. as a user, I can see others' posts
-6. as a user, I can create a chat room
-7. as a user, I can browse the chat history
-8. as a user, I can search among the chat history
-9. as a user, I can manage chat room members
+3. as a user, I can post messages in the chat room
+4. as a user, I can see others' posts instantly
+5. as a user, I can browse the chat history
+6. as a user, I can search among the chat history
 
 ## Research Topics
 
@@ -86,7 +80,7 @@ An Example List with Embedded Logs:
 * (1 point) MongoDB Atlas
     * I'm going to use MongoDB Atlas
 
-16 points total out of 8 required points (I may not do all of these)
+19 points total out of 8 required points (I may not do all of these)
 
 ## [Link to Initial Main Project File](app.js) 
 
