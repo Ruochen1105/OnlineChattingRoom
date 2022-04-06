@@ -16,7 +16,7 @@ function App() {
   }), [msg])
 
   return (
-    <>
+    <div>
       <table><thead>
         <tr>
           <td>content</td>
@@ -42,7 +42,7 @@ function App() {
           .catch((err)=>{console.log(err)})}
         }}/>
       </form>
-    </>
+    </div>
   );
 }
 
