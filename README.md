@@ -90,6 +90,6 @@ An Example List with Embedded Logs:
 ## Annotations / References Used
 
 1. [passport.js authentication docs](http://passportjs.org/docs)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/)
+2. [React.js docs](https://reactjs.org/docs/getting-started.html)
 3. [Socket.io documentaion](https://socket.io/docs/v4/)
 4. [Selenium documentation](https://www.selenium.dev/documentation/)
