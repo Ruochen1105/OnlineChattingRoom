@@ -79,9 +79,12 @@ An Example List with Embedded Logs:
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
+
+* (2 points) Deploy on Heroku 
+    * I'm going to deploy my app on Heroku
+
+* (1 point) MongoDB Atlas
+    * I'm going to use MongoDB Atlas
 
 16 points total out of 8 required points (I may not do all of these)
 
