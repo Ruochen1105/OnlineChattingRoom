@@ -93,3 +93,5 @@ An Example List with Embedded Logs:
 2. [React.js docs](https://reactjs.org/docs/getting-started.html)
 3. [Socket.io documentaion](https://socket.io/docs/v4/)
 4. [Selenium documentation](https://www.selenium.dev/documentation/)
+5. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
+6. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
