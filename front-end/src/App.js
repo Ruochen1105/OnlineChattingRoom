@@ -35,7 +35,7 @@ function App() {
           }}></input>
           <input type={'submit'} value='Search' onClick={e => {
             e.preventDefault();
-            fetch(`https://ruochen-ait-final.herokuapp.com/api/search?=${search}`)
+            fetch(`https://ruochen-ait-final.herokuapp.com/api/search?search=${search}`)
             .then(res => res.json())
             .then(resJson => {
               setHistory(resJson);
