@@ -18,17 +18,23 @@ const log = mongoose.model('log', new mongoose.Schema({
     time: String
 }));
 
-app.post('/api', (req, res) => {
+app.post('/api/msg', (req, res) => {
     const date = new Date();
     const time = (date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds()); // reference: https://usefulangle.com/post/187/nodejs-get-date-time
     log.create({content: req.body.message, poster: crypto.randomUUID(), time: time});
     res.json([{}]);
 })
 
-app.get('/api', (req, res) => {
+app.get('/api/msg', (req, res) => {
     log.find({}, (err, varToStoreResult, count) => {
         res.json(varToStoreResult);
     })
+})
+
+app.get('/api/search', async (req, res) => {
+    const query = req.query;
+    const history = await log.find(query);
+    res.json(history);
 })
 
 app.get('/*', (req, res) => {
