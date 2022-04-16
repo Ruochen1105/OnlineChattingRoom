@@ -1,4 +1,4 @@
-# Online Chatting Rooms
+# Online Chatting Room
 
 ## Overview
 

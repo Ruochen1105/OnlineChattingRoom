@@ -6,42 +6,69 @@ function App() {
   const [text, setText] = useState([{}]);
   const [msg, setMSG] = useState();
 
-  useEffect((e => {
+  useEffect(e => {
     fetch('https://ruochen-ait-final.herokuapp.com/api')
     .then(res => res.json())
     .then(resJson => {
       setText(resJson);
     })
-    .catch(err => {console.log(err)})
-  }), [msg])
+    .catch(err => {console.log(err)});
+  }, [msg]);
+
+  useEffect(e => {
+    setMSG('');
+  }, []);
+
+  useEffect(e => {
+    document.querySelector('#msg').scrollTop = document.querySelector('#msg').scrollHeight;
+  }, [text]);
 
   return (
-    <div>
-      <table><thead>
-        <tr>
-          <td>content</td>
-          <td>poster</td>
-          <td>time</td>
-        </tr></thead>
-        {text.map(element => {
-          return (
-            <tr>
-              <td>{element.content}</td>
-              <td>{element.poster}</td>
-              <td>{element.time}</td>
+    <div id='flexContainer'>
+      <h1>Online Chatting Room</h1>
+      <div className='container1'>
+        <table id='msg'>
+          {text.map(element => {
+            return (
+              <tbody>{/*TODO: add key (probably some unique id from db) to each tbody*/}
+              <tr>
+                <td id='postInfo'>{element.time + ' ' + element.poster + ':'}</td>
+              </tr>
+              <tr>
+                <td>{'\t' + element.content}</td>
+              </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        <table id='users'>
+          <thead>
+            <tr className='tableHead'>
+              <th>Online Users:</th>
             </tr>
-          )
-        })}
-      </table>
-      <form onSubmit={e => e.preventDefault()}>
-        <input type = 'text' value={msg} onChange={e => {setMSG(e.target.value)}}/>
-        <input type = 'submit' value = 'Post' onClick={e => {
-          if (msg === '') {alert("You can't send nothing!")} else {
-          fetch('https://ruochen-ait-final.herokuapp.com/api', {method: 'post', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({message: msg})})
-          .then(res => {setMSG('')})
-          .catch((err)=>{console.log(err)})}
-        }}/>
-      </form>
+          </thead>
+          {/*user.map(element => {
+            return (
+              <tbody>{TODO: add key (probably some unique id from db) to each tbody}
+              <tr>
+                <td>{element.name}</td>
+              </tr>
+              </tbody>
+            );
+          })*/}
+        </table>
+      </div>
+      <div className='container2'>
+      <textarea rows={15} value = {msg} onChange={e => {
+        setMSG(e.target.value);
+      }}></textarea>
+        <button onClick={e => {
+          if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
+            fetch('https://ruochen-ait-final.herokuapp.com/api', {method: 'post', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({message: msg})})
+            .then(res => {setMSG('')})
+            .catch((err)=>{console.log(err)})}
+        }}>  Post  </button>
+      </div>
     </div>
   );
 }

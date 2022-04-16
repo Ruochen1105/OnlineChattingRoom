@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+#flexContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-height: 80%;
+  background-color: bisque;
+}
+
+div.container1 {
+  display: flex;
+  flex-direction: row;
+  height: 60%;
+  width: 80%;
+}
+
+div.container2 {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  width: 80%;
+}
+
+#msg {
+  display: block;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+  white-space: pre;
+  flex-grow: 4;
+  flex-shrink: 4;
+  overflow-y: scroll;
+  max-height: 600px;
+  background-color: blanchedalmond;
+}
+
+#users {
+  display: block;
+  border: 2px solid black;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: antiquewhite;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+#postInfo {
+  color: blue;
+}
+
+textarea {
+  width: auto;
+  resize: none;
+  background-color: lightgoldenrodyellow;
+}
+
+button {
+  align-self: flex-end;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  white-space: pre;
+}
+
+h1 {
+  font-size: 52px;
+  font-family: cursive;
+}
