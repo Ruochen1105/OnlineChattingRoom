@@ -18,6 +18,10 @@ function App() {
   }, [msg]);
 
   useEffect(e => {
+    document.querySelector('#history').scrollTop = document.querySelector('#history').scrollHeight;
+  }, [search]);
+
+  useEffect(e => {
     document.querySelector('#msg').scrollTop = document.querySelector('#msg').scrollHeight;
   }, [text]);
 
@@ -37,6 +41,7 @@ function App() {
               setHistory(resJson);
             })
             .catch(err => {console.log(err)});
+            setSearch('');
           }
           }></input>
         </form>

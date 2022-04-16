@@ -32,8 +32,8 @@ app.get('/api/msg', (req, res) => {
 })
 
 app.get('/api/search', async (req, res) => {
-    const query = req.query;
-    const history = await log.find(query);
+    const query = req.query.search;
+    const history = await log.find({"content": {"$regex": query, "$options": "i"}});
     res.json(history);
 })
 
