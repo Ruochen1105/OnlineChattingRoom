@@ -28,4 +28,14 @@ router.post('/reg', async (req, res) => {
     }
 });
 
+router.post('/log', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    try {
+        
+    } catch (error) {
+        res.status(403).json({"msg": error.message});
+    }
+});
+
 module.exports = router;

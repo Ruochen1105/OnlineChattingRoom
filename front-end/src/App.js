@@ -13,6 +13,8 @@ function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repassword, setRepassword] = useState('');
+  const [usn, setUsn] = useState('');
+  const [pwd, setPwd] = useState('');
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
@@ -51,9 +53,19 @@ function App() {
               <center>
               <form onClick={e => {e.preventDefault()}} className='container4'>
                 <ul>
-                  <li>Username: <input type='text'/></li>
-                  <li>Password: <input type='password'/></li>
-                  <li><input type='submit' value='Log In'/></li>
+                  <li>Username: <input type='text' value={usn} onChange={e => {setUsn(e.target.value)}}/></li>
+                  <li>Password: <input type='password' value={pwd} onChange={e => {setPwd(e.target.value)}}/></li>
+                  <li><input type='submit' value='Log In' onClick={e => {
+                    fetch('http://localhost:3000/auth/log', {
+                      method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body:JSON.stringify({username: usn, password: pwd}),
+                      })
+                      .then(res => res.json()).then(resJson => {alert(resJson.msg)}).catch(err => {/*console.log(err.message);*/});
+                      setUsn('');setPwd('');
+                  }}/></li>
                 </ul>
               </form>
               </center>
@@ -66,7 +78,7 @@ function App() {
                   <li>Username: <input type='text' value={username} onChange={e => {setUsername(e.target.value)}}/></li>
                   <li>Password: <input type='password' value={password} onChange={e => {setPassword(e.target.value)}}/></li>
                   <li>Re-enter Password: <input type='password' value={repassword} onChange={e => {setRepassword(e.target.value)}}/></li>
-                  <li><input type='submit' value='Register' onClick={(e) => {
+                  <li><input type='submit' value='Register' onClick={e => {
                       fetch('http://localhost:3000/auth/reg', {
                         method: 'POST',
                         headers: {
