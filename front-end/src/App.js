@@ -74,8 +74,7 @@ function App() {
                         },
                         body:JSON.stringify({username: username, password: password, repassword: repassword}),
                       })
-                      .then(res => {})
-                      .catch(err => {console.log(err);});
+                      .then(res => res.json()).then(resJson => {alert(resJson.msg)}).catch(err => {/*console.log(err.message);*/});
                       setUsername('');setPassword('');setRepassword('');
                     }
                   }/></li>
