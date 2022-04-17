@@ -7,7 +7,7 @@ function App() {
   
   const [text, setText] = useState([{}]);
   const [msg, setMSG] = useState('');
-  const [history, setHistory] = useState([{}]);
+  const [history, setHistory] = useState([{"time": '', "poster": '', "content": ''}]);
   const [search, setSearch] = useState('');
   const [modal, setModal] = useState(false);
 
@@ -25,7 +25,7 @@ function App() {
 
   useEffect(e => {
     document.querySelector('#history').scrollTop = document.querySelector('#history').scrollHeight;
-  }, [search]);
+  }, [history]);
 
   useEffect(e => {
     document.querySelector('#msg').scrollTop = document.querySelector('#msg').scrollHeight;
@@ -44,8 +44,30 @@ function App() {
         </Modal.Header>
         <Modal.Body>
           <div className='container3'>
-            <button>Log In</button>
-            <button>Register</button>
+            <div>
+              <center>
+              <form onClick={e => {e.preventDefault()}} className='container4'>
+                <ul>
+                  <li>Username: <input type='text'/></li>
+                  <li>Password: <input type='password'/></li>
+                  <li><input type='submit' value='Log In'/></li>
+                </ul>
+              </form>
+              </center>
+            </div>
+            <hr width="1" size="200"/>
+            <div>
+              <center>
+              <form onClick={e => {e.preventDefault()}} className='container4'>
+                <ul>
+                  <li>Username: <input type='text'/></li>
+                  <li>Password: <input type='password'/></li>
+                  <li>Re-enter Password: <input type='password'/></li>
+                  <li><input type='submit' value='Register'/></li>
+                </ul>
+              </form>
+              </center>
+            </div>
           </div>
         </Modal.Body>
       </Modal>
@@ -80,7 +102,7 @@ function App() {
             return (
               <tbody>{/*TODO: add key (probably some unique id from db) to each tbody*/}
               <tr>
-                <td id='postInfo'>{element.time + ' ' + element.poster + ':'}</td>
+                <td id='postInfo'>{element.time + ' ' + element.poster}</td>
               </tr>
               <tr>
                 <td>{'\t' + element.content}</td>
@@ -94,7 +116,7 @@ function App() {
             return (
               <tbody>{/*TODO: add key (probably some unique id from db) to each tbody*/}
               <tr>
-                <td id='postInfo'>{element.time + ' ' + element.poster + ':'}</td>
+                <td id='postInfo'>{element.time + ' ' + element.poster}</td>
               </tr>
               <tr>
                 <td>{'\t' + element.content}</td>
@@ -121,7 +143,7 @@ function App() {
         </table>
       </div>
       <div className='container2'>
-      <textarea rows={13} value = {msg} onChange={e => {
+      <textarea rows={10} value = {msg} onChange={e => {
         setMSG(e.target.value);
       }}></textarea>
         <button onClick={e => {
