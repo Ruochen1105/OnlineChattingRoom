@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const crypto = require('crypto');
 
-
 router.post('/msg', (req, res) => {
     const date = new Date();
     const time = (date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "-" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds()); // reference: https://usefulangle.com/post/187/nodejs-get-date-time

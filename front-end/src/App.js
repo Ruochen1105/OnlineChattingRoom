@@ -10,6 +10,9 @@ function App() {
   const [history, setHistory] = useState([{"time": '', "poster": '', "content": ''}]);
   const [search, setSearch] = useState('');
   const [modal, setModal] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [repassword, setRepassword] = useState('');
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
@@ -58,12 +61,24 @@ function App() {
             <hr width="1" size="200"/>
             <div>
               <center>
-              <form onClick={e => {e.preventDefault()}} className='container4'>
+              <form onClick={e => {e.preventDefault()}} className='container4' id='reg'>
                 <ul>
-                  <li>Username: <input type='text'/></li>
-                  <li>Password: <input type='password'/></li>
-                  <li>Re-enter Password: <input type='password'/></li>
-                  <li><input type='submit' value='Register'/></li>
+                  <li>Username: <input type='text' value={username} onChange={e => {setUsername(e.target.value)}}/></li>
+                  <li>Password: <input type='password' value={password} onChange={e => {setPassword(e.target.value)}}/></li>
+                  <li>Re-enter Password: <input type='password' value={repassword} onChange={e => {setRepassword(e.target.value)}}/></li>
+                  <li><input type='submit' value='Register' onClick={(e) => {
+                      fetch('http://localhost:3000/auth/reg', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body:JSON.stringify({username: username, password: password, repassword: repassword}),
+                      })
+                      .then(res => {})
+                      .catch(err => {console.log(err);});
+                      setUsername('');setPassword('');setRepassword('');
+                    }
+                  }/></li>
                 </ul>
               </form>
               </center>
@@ -148,7 +163,13 @@ function App() {
       }}></textarea>
         <button onClick={e => {
           if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
-            fetch('https://ruochen-ait-final.herokuapp.com/api/msg', {method: 'post', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({message: msg})})
+            fetch('https://ruochen-ait-final.herokuapp.com/api/msg', {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({message: msg})
+            })
             .then(res => {setMSG('')})
             .catch((err)=>{console.log(err)})}
         }} id='btn1'>  Post  </button>
