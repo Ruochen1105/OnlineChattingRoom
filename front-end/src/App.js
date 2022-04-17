@@ -1,5 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   
@@ -7,6 +9,10 @@ function App() {
   const [msg, setMSG] = useState('');
   const [history, setHistory] = useState([{}]);
   const [search, setSearch] = useState('');
+  const [modal, setModal] = useState(false);
+
+  const handleClose = () => setModal(false);
+  const handleShow = () => setModal(true);
 
   useEffect(e => {
     fetch('https://ruochen-ait-final.herokuapp.com/api/msg')
@@ -27,6 +33,23 @@ function App() {
 
   return (
     <div id='flexContainer'>
+
+      <button onClick={handleShow} id='btn1'>
+        login / register
+      </button>
+
+      <Modal size="lg"  backdrop="static" aria-labelledby="contained-modal-title-vcenter" centered show={modal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Log In / Register</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='container3'>
+            <button>Log In</button>
+            <button>Register</button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
       <h1>Online Chatting Room</h1>
       <div className='container1'>
         <form>

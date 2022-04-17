@@ -1,14 +1,20 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
-/*
-const log = new mongoose.Schema({
+
+const logSchema = new mongoose.Schema({
     content: String,
     poster: String,
     time: String
 });
 
-mongoose.model("log", log);
-*/
+const userSchema = new mongoose.Schema({
+  username: {type: String, required: true, minlength: 3},
+  password: {type: String, required: true},
+})
+
+const log = mongoose.model('log', logSchema);
+const user = mongoose.model('user', userSchema);
+
 // OPTIONAL: modify the connection code below if
 // using mongodb authentication
 const mongooseOpts = {
@@ -23,3 +29,8 @@ mongoose.connect(process.env.MONGODB_URI, mongooseOpts, (err) => {
     console.log('connected to database'); 
   }
 });
+
+module.exports = {
+  log: log,
+  user: user,
+}
