@@ -83,7 +83,7 @@ An Example Log:
 
 19 points total out of 8 required points (I may not do all of these)
 
-## [Link to Initial Main Project File](app.js) 
+## Link to Initial Main Project File[Frontend](./front-end/src/App.js)[Backend](./back-end/src/app.js) 
 
 ## Annotations / References Used
 
