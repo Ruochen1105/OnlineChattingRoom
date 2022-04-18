@@ -15,7 +15,7 @@ An Example User:
 ```javascript
 {
   username: "foo",
-  hash: // a password hash,
+  password: // a password hash,
   posts: //an array of references to Logs objects
 }
 ```
@@ -31,7 +31,7 @@ An Example Log:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.js) 
+## [Link to Database Connection & Schema](./back-end/src/db.js) 
 
 ## Wireframes
 
@@ -41,7 +41,7 @@ An Example Log:
 
 /home - page where everything happens
 
-![list](documents/home.png)
+![list](documents/homepage.png)
 
 ## Site map
 
@@ -73,6 +73,7 @@ An Example Log:
 
 * (5 points) Integrate user authentication
     * I'm going to be using passport for user authentication
+    * I'm going to use JsonWebToken for keeping track of user authentication status
 
 * (2 points) Deploy on Heroku 
     * I'm going to deploy my app on Heroku
@@ -92,3 +93,9 @@ An Example Log:
 4. [Selenium documentation](https://www.selenium.dev/documentation/)
 5. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
 6. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
+7. [How To Implement API Authentication with JSON Web Tokens and Passport](https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport)
+
+## TODO
+
+1. socket.io
+2. for logged user, hide the log in/register button
