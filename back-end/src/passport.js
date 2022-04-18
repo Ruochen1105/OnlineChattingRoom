@@ -1,5 +1,8 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+require('dotenv').config();
+const LocalStrategy = require('passport-local').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const argon2 = require('argon2');
 const {user} = require('./db.js');
 
@@ -15,6 +18,22 @@ passport.use(new LocalStrategy(async function verify(username, password, done) {
     } catch (error) {
         done(error, false)
     }
+}));
+
+passport.use(new JwtStrategy({
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.secret,
+}, async function (payload, done) {
+    user.findById(payload.id, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            return done(null, user);
+         } else {
+             return done(null, false);
+         }
+    });
 }));
 
 passport.serializeUser(function(user, done) {

@@ -20,7 +20,7 @@ function App() {
   const handleShow = () => setModal(true);
 
   useEffect(e => {
-    fetch('https://ruochen-ait-final.herokuapp.com/api/msg')
+    fetch('https://ruochen-ait-final.herokuapp.com/api/msg', {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
     .then(res => res.json())
     .then(resJson => {
       setText(resJson);
@@ -55,16 +55,17 @@ function App() {
                 <ul>
                   <li>Username: <input type='text' value={usn} onChange={e => {setUsn(e.target.value)}}/></li>
                   <li>Password: <input type='password' value={pwd} onChange={e => {setPwd(e.target.value)}}/></li>
-                  <li><input type='submit' value='Log In' onClick={e => {
-                    fetch('http://localhost:3000/auth/log', {
+                  <li><input type='submit' value='Log In' onClick={async (e) => {
+                    const res = await fetch('https://ruochen-ait-final.herokuapp.com/auth/log', {
                       method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json',
-                        },
-                        body:JSON.stringify({username: usn, password: pwd}),
-                      })
-                      .then(res => res.json()).then(resJson => {alert(resJson.msg)}).catch(err => {/*console.log(err.message);*/});
-                      setUsn('');setPwd('');
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body:JSON.stringify({username: usn, password: pwd}),
+                    });
+                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt);}
+                    else {alert("Failed to log in.")}
+                    setUsn('');setPwd('');
                   }}/></li>
                 </ul>
               </form>
@@ -79,7 +80,7 @@ function App() {
                   <li>Password: <input type='password' value={password} onChange={e => {setPassword(e.target.value)}}/></li>
                   <li>Re-enter Password: <input type='password' value={repassword} onChange={e => {setRepassword(e.target.value)}}/></li>
                   <li><input type='submit' value='Register' onClick={e => {
-                      fetch('http://localhost:3000/auth/reg', {
+                      fetch('https://ruochen-ait-final.herokuapp.com/auth/reg', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ function App() {
           }}></input>
           <input type={'submit'} value='Search' onClick={e => {
             e.preventDefault();
-            fetch(`https://ruochen-ait-final.herokuapp.com/api/search?search=${search}`)
+            fetch(`https://ruochen-ait-final.herokuapp.com/api/search?search=${search}`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
             .then(res => res.json())
             .then(resJson => {
               setHistory(resJson);
@@ -178,6 +179,7 @@ function App() {
               method: 'post',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`
               },
               body: JSON.stringify({message: msg})
             })

@@ -26,16 +26,16 @@ router.post('/reg', async (req, res) => {
     }
 });
 
-router.post('/log', passport.authenticate('local', {successRedirect:'/'}), async (req, res) => {
+router.post('/log', passport.authenticate('local'), async function (req, res) {
     const username = req.body.username;
-    const aUser = user.findOne({username: username});
+    const aUser = await user.findOne({username: username}).exec();
     const id = aUser.id;
     try {
         const token = await JWT.sign({
             id: id,
             username: username,
         }, process.env.secret);
-        console.log(token);
+        res.status(200).json(JSON.stringify({"jwt": token}));
     } catch (error) {
         res.status(403).json({"msg": error.message});
     }
