@@ -22,6 +22,7 @@ function App() {
   const [usn, setUsn] = useState('');
   const [pwd, setPwd] = useState('');
   const [msgTrigger, setMsgTrigger] = useState(0);
+  const [logged, setLogged] = useState(false);
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
@@ -49,10 +50,18 @@ function App() {
 
   return (
     <div id='flexContainer'>
+      
+      {logged &&
+        <button onClick={() => {sessionStorage.removeItem('jwt'); setLogged(false);}} id='btnLogin'>
+          logout
+        </button>
+      }
 
-      <button onClick={handleShow} id='btnLogin'>
-        login / register
-      </button>
+      {!logged &&
+        <button onClick={handleShow} id='btnLogin'>
+          login / register
+        </button>
+      }
 
       <Modal size="lg"  backdrop="static" aria-labelledby="contained-modal-title-vcenter" centered show={modal} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -74,7 +83,7 @@ function App() {
                       },
                       body:JSON.stringify({username: usn, password: pwd}),
                     });
-                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt); handleClose(); socket.emit('request');}
+                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt); handleClose(); socket.emit('request');setLogged(true);}
                     else {alert("Failed to log in.")}
                     setUsn('');setPwd('');
                   }}/></li>
