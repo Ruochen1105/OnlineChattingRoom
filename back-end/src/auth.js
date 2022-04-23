@@ -20,7 +20,7 @@ router.post('/reg', async (req, res) => {
         if (password !== repassword) {return res.status(403).json({"msg": "Two passwords don't match."})}
         const newUser = new user({username: username, password: await argon2.hash(password)});
         await newUser.save();
-        res.status(200).send();
+        res.status(200).json({"msg": 'Success.'});
     } catch (error) {
         res.status(403).json({"msg": error.message});
     }
