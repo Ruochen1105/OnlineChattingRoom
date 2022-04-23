@@ -21,13 +21,13 @@ function App() {
   const [repassword, setRepassword] = useState('');
   const [usn, setUsn] = useState('');
   const [pwd, setPwd] = useState('');
-  const [msgTrigger, setMsgTrigger] = useState(false);
+  const [msgTrigger, setMsgTrigger] = useState(0);
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
   useEffect(() => {
-    socket.on('update', function(){setMsgTrigger(!msgTrigger);})
+    socket.on('update', function(){setMsgTrigger(t => t + 1)})
   }, []);
 
   useEffect(e => {
@@ -74,7 +74,7 @@ function App() {
                       },
                       body:JSON.stringify({username: usn, password: pwd}),
                     });
-                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt);handleClose();socket.emit('request');}
+                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt); handleClose(); socket.emit('request');}
                     else {alert("Failed to log in.")}
                     setUsn('');setPwd('');
                   }}/></li>
@@ -98,7 +98,7 @@ function App() {
                         },
                         body:JSON.stringify({username: username, password: password, repassword: repassword}),
                       })
-                      .then(res => res.json()).then(resJson => {alert(resJson.msg)}).catch(err => {/*console.log(err.message);*/});
+                      .then(res => res.json()).then(resJson => {alert(resJson.msg)}).catch();
                       setUsername('');setPassword('');setRepassword('');
                     }
                   }/></li>
@@ -194,7 +194,7 @@ function App() {
               },
               body: JSON.stringify({message: msg})
             })
-            .then(res => {setMSG('')})
+            .then(res => {setMSG(''); socket.emit('post');})
             .catch((err)=>{console.log(err)})}
         }} id='btn1'>  Post  </button>
       </div>

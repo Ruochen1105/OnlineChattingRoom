@@ -16,13 +16,13 @@ router.post('/reg', async (req, res) => {
     const repassword = req.body.repassword;
     try {
         const found = await user.findOne({username: username}).exec();
-        if (found) {return res.status(403).json({"msg": "User exists."});}
-        if (password !== repassword) {return res.status(403).json({"msg": "Two passwords don't match."})}
+        if (found) {return res.json({"msg": "User exists."});}
+        if (password !== repassword) {return res.json({"msg": "Two passwords don't match."})}
         const newUser = new user({username: username, password: await argon2.hash(password)});
         await newUser.save();
         res.status(200).json({"msg": 'Success.'});
     } catch (error) {
-        res.status(403).json({"msg": error.message});
+        res.json({"msg": error.message});
     }
 });
 
