@@ -69,7 +69,7 @@ div.container2 {
   flex-grow: 1;
   flex-shrink: 2;
   overflow-y: scroll;
-  max-height: 600px;
+  height: 600px;
   background-color: rgba(255, 235, 205, 0.925);
 }
 
@@ -82,7 +82,7 @@ div.container2 {
   flex-grow: 3;
   flex-shrink: 1;
   overflow-y: scroll;
-  max-height: 600px;
+  height: 600px;
   background-color: blanchedalmond;
 }
 
@@ -157,3 +157,12 @@ div.vl {
   border-left: thick solid #ff0000;
 }
 
+#btnLogin {
+  align-self: flex-end;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  white-space: pre;
+  position: relative;
+  top: 20px;
+  right: 20px;
+}

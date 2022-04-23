@@ -2,8 +2,12 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import socketIOClient from 'socket.io-client';
 
 function App() {
+
+  const dev = (bool) => {if (bool){return 'http://localhost:3000'}else{return 'https://ruochen-ait-final.herokuapp.com'}}
+  const devBool = true;
   
   const [text, setText] = useState([{}]);
   const [msg, setMSG] = useState('');
@@ -19,8 +23,12 @@ function App() {
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
+  useEffect(() => {
+    const socket = socketIOClient(dev(devBool));}
+   );
+
   useEffect(e => {
-    fetch('https://ruochen-ait-final.herokuapp.com/api/msg', {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
+    fetch(`${dev(devBool)}/api/msg`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
     .then(res => res.json())
     .then(resJson => {
       setText(resJson);
@@ -39,7 +47,7 @@ function App() {
   return (
     <div id='flexContainer'>
 
-      <button onClick={handleShow} id='btn1'>
+      <button onClick={handleShow} id='btnLogin'>
         login / register
       </button>
 
@@ -56,7 +64,7 @@ function App() {
                   <li>Username: <input type='text' value={usn} onChange={e => {setUsn(e.target.value)}}/></li>
                   <li>Password: <input type='password' value={pwd} onChange={e => {setPwd(e.target.value)}}/></li>
                   <li><input type='submit' value='Log In' onClick={async (e) => {
-                    const res = await fetch('https://ruochen-ait-final.herokuapp.com/auth/log', {
+                    const res = await fetch(`${dev(devBool)}/auth/log`, {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -80,7 +88,7 @@ function App() {
                   <li>Password: <input type='password' value={password} onChange={e => {setPassword(e.target.value)}}/></li>
                   <li>Re-enter Password: <input type='password' value={repassword} onChange={e => {setRepassword(e.target.value)}}/></li>
                   <li><input type='submit' value='Register' onClick={e => {
-                      fetch('https://ruochen-ait-final.herokuapp.com/auth/reg', {
+                      fetch(`${dev(devBool)}/auth/reg`, {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json',
@@ -107,7 +115,7 @@ function App() {
           }}></input>
           <input type={'submit'} value='Search' onClick={e => {
             e.preventDefault();
-            fetch(`https://ruochen-ait-final.herokuapp.com/api/search?search=${search}`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
+            fetch(`${dev(devBool)}/api/search?search=${search}`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
             .then(res => res.json())
             .then(resJson => {
               setHistory(resJson);
@@ -175,7 +183,7 @@ function App() {
       }}></textarea>
         <button onClick={e => {
           if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
-            fetch('https://ruochen-ait-final.herokuapp.com/api/msg', {
+            fetch(`${dev(devBool)}/api/msg`, {
               method: 'post',
               headers: {
                 'Content-Type': 'application/json',
