@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const logSchema = new mongoose.Schema({
     content: String,
     poster: String,
-    time: String
+    time: String,
+    image: {type: Boolean,
+      default: false
+    }
 });
 
 const userSchema = new mongoose.Schema({

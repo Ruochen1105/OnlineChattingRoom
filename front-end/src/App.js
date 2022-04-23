@@ -28,7 +28,8 @@ function App() {
   const handleShow = () => setModal(true);
 
   useEffect(() => {
-    socket.on('update', function(){setMsgTrigger(t => t + 1)})
+    socket.on('update', function(){setMsgTrigger(t => t + 1)});
+    socket.on('user', function(user){console.log(user)});
   }, []);
 
   useEffect(e => {
@@ -83,7 +84,7 @@ function App() {
                       },
                       body:JSON.stringify({username: usn, password: pwd}),
                     });
-                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt); handleClose(); socket.emit('request');setLogged(true);}
+                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt); handleClose(); socket.emit('login', [usn]);setLogged(true);}
                     else {alert("Failed to log in.")}
                     setUsn('');setPwd('');
                   }}/></li>
