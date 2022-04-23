@@ -9,7 +9,6 @@ const io = require('socket.io')(server);
 
 const api = require('./api');
 const auth = require('./auth');
-const { Socket } = require('socket.io');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', '..', 'front-end', 'build')));
