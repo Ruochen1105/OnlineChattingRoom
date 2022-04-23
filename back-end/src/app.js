@@ -1,6 +1,5 @@
 require('dotenv').config()
 const express = require("express");
-const cors = require('cors')
 const path = require('path');
 const passport = require('passport');
 const app = express();
@@ -11,7 +10,6 @@ const io = require('socket.io')(server);
 const api = require('./api');
 const auth = require('./auth');
 
-app.use(cors({origin: 'http://localhost:3001'}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', '..', 'front-end', 'build')));
 
@@ -26,7 +24,14 @@ app.get('/*', (req, res) => {
 
 io.on('connect', function (sock) {
     console.log(sock.id, ' has connected');
-    sock.emit('welcome', {msg: 'hello'});
-})
+
+    sock.on('post', function () {
+        io.emit('update');
+    });
+
+    sock.on('request', function() {
+        sock.emit('update');
+    })
+});
 
 server.listen(process.env.PORT || 3000);

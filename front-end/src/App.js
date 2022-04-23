@@ -4,10 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import socketIOClient from 'socket.io-client';
 
-function App() {
 
-  const dev = (bool) => {if (bool){return 'http://localhost:3000'}else{return 'https://ruochen-ait-final.herokuapp.com'}}
-  const devBool = true;
+const dev = (bool) => {if (bool){return 'http://localhost:3000'}else{return 'https://ruochen-ait-final.herokuapp.com'}}
+const devBool = true;
+const socket = socketIOClient(dev(devBool));
+
+function App() {
   
   const [text, setText] = useState([{}]);
   const [msg, setMSG] = useState('');
@@ -19,13 +21,14 @@ function App() {
   const [repassword, setRepassword] = useState('');
   const [usn, setUsn] = useState('');
   const [pwd, setPwd] = useState('');
+  const [msgTrigger, setMsgTrigger] = useState(false);
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
   useEffect(() => {
-    const socket = socketIOClient(dev(devBool));}
-   );
+    socket.on('update', function(){setMsgTrigger(!msgTrigger);})
+  }, []);
 
   useEffect(e => {
     fetch(`${dev(devBool)}/api/msg`, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`}})
@@ -34,7 +37,7 @@ function App() {
       setText(resJson);
     })
     .catch(err => {console.log(err)});
-  }, [msg]);
+  }, [msgTrigger]);
 
   useEffect(e => {
     document.querySelector('#history').scrollTop = document.querySelector('#history').scrollHeight;
@@ -71,7 +74,7 @@ function App() {
                       },
                       body:JSON.stringify({username: usn, password: pwd}),
                     });
-                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt);}
+                    if (res.status === 200) {const resJson = await res.json(); sessionStorage.setItem("jwt", JSON.parse(resJson).jwt);handleClose();socket.emit('request');}
                     else {alert("Failed to log in.")}
                     setUsn('');setPwd('');
                   }}/></li>
