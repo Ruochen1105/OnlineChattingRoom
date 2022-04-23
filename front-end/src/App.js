@@ -145,9 +145,9 @@ function App() {
               <th>History Posts:</th>
             </tr>
           </thead>
-          {history.map(element => {
+          {history.map((element, i) => {
             return (
-              <tbody>{/*TODO: add key (probably some unique id from db) to each tbody*/}
+              <tbody key={`history${i}`}>
               <tr>
                 <td id='postInfo'>{element.time + ' ' + element.poster}</td>
               </tr>
@@ -159,9 +159,9 @@ function App() {
           })}
         </table>
         <table id='msg'>
-          {text.map(element => {
+          {text.map((element, i) => {
             return (
-              <tbody>{/*TODO: add key (probably some unique id from db) to each tbody*/}
+              <tbody key={`msg${i}`}>
               <tr>
                 <td id='postInfo'>{element.time + ' ' + element.poster}</td>
               </tr>
