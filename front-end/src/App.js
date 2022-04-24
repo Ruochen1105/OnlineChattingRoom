@@ -11,25 +11,36 @@ const socket = socketIOClient(dev(devBool));
 
 function App() {
   
-  const [text, setText] = useState([{}]);
-  const [msg, setMSG] = useState('');
+  const [text, setText] = useState([{"time": '', "poster": '', "content": ''}]);
   const [history, setHistory] = useState([{"time": '', "poster": '', "content": ''}]);
+  const [userList, setUserList] = useState([]);
+  
+  const [msg, setMSG] = useState('');
   const [search, setSearch] = useState('');
-  const [modal, setModal] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repassword, setRepassword] = useState('');
   const [usn, setUsn] = useState('');
   const [pwd, setPwd] = useState('');
+
+  const [modal, setModal] = useState(false);
   const [msgTrigger, setMsgTrigger] = useState(0);
   const [logged, setLogged] = useState(false);
 
   const handleClose = () => setModal(false);
   const handleShow = () => setModal(true);
 
+  function updateMsgTrigger(){
+    setMsgTrigger(t => t+1);
+  }
+
+  function updateUserList(user){
+    setUserList(prev => user[0]);
+  }
+
   useEffect(() => {
-    socket.on('update', function(){setMsgTrigger(t => t + 1)});
-    socket.on('user', function(user){console.log(user)});
+    socket.on('update', updateMsgTrigger);
+    socket.on('user', updateUserList);
   }, []);
 
   useEffect(e => {
@@ -179,15 +190,15 @@ function App() {
               <th>Online Users:</th>
             </tr>
           </thead>
-          {/*user.map(element => {
+          {userList.map(element => {
             return (
-              <tbody>{TODO: add key (probably some unique id from db) to each tbody}
+              <tbody>
               <tr>
-                <td>{element.name}</td>
+                <td>{element}</td>
               </tr>
               </tbody>
             );
-          })*/}
+          })}
         </table>
       </div>
       <div className='container2'>
