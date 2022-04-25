@@ -26,7 +26,6 @@ An Example Log:
   poster: // a reference to User objects
   time: "1111-11-11 11:11:11",
   image: // a boolean to indicate if this log is an image or not
-  ]
 }
 ```
 
