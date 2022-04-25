@@ -94,8 +94,3 @@ An Example Log:
 5. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
 6. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
 7. [How To Implement API Authentication with JSON Web Tokens and Passport](https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport)
-
-## TODO
-
-1. socket.io
-2. for logged user, hide the log in/register button

@@ -23,19 +23,32 @@ app.get('/*', (req, res) => {
 
 
 io.on('connect', function (sock) {
-    console.log(sock.id, ' has connected');
 
     sock.on('login', function(username) {
         sock.username = username[0];
         io.online.push(sock.username);
         sock.join('logged');
         sock.emit('update');
-        io.to('logged').emit('user', [io.online])
+        io.to('logged').emit('user', [io.online]);
     })
 
     sock.on('post', function () {
         io.emit('update');
     });
+
+    sock.on('logout', function() {
+        sock.leave('logged');
+        io.online = io.online.filter(ele => ele !== sock.username);
+        sock.username = undefined;
+        io.to('logged').emit('user', [io.online]);
+    });
+
+    sock.on('disconnect', function() {
+        sock.leave('logged');
+        io.online = io.online.filter(ele => ele !== sock.username);
+        sock.username = undefined;
+        io.to('logged').emit('user', [io.online]);
+    })
 });
 
 server.listen(process.env.PORT || 3000);

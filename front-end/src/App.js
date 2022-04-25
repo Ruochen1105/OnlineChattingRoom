@@ -64,7 +64,14 @@ function App() {
     <div id='flexContainer'>
       
       {logged &&
-        <button onClick={() => {sessionStorage.removeItem('jwt'); setLogged(false);}} id='btnLogin'>
+        <button onClick={() => {
+          sessionStorage.removeItem('jwt');
+          setLogged(false);
+          socket.emit('logout');
+          setText([{"time": '', "poster": '', "content": ''}]);
+          setHistory([{"time": '', "poster": '', "content": ''}]);
+          setUserList([]);
+        }} id='btnLogin'>
           logout
         </button>
       }
