@@ -102,10 +102,9 @@ th {
   color: blue;
 }
 
-textarea {
-  width: auto;
-  resize: none;
+div.container2 > textarea {
   background-color: lightgoldenrodyellow;
+  resize: none;
 }
 
 #btn1 {
@@ -169,4 +168,9 @@ div.vl {
 
 input[type='file'] {
   color: transparent;
+}
+
+#upload {
+  align-self: center;
+  white-space: pre;
 }

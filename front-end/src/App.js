@@ -91,7 +91,7 @@ function App() {
           <div className='container3'>
             <div>
               <center>
-              <form onClick={e => {e.preventDefault()}} className='container4'>
+              <form onClick={e => {e.preventDefault()}}>
                 <ul>
                   <li>Username: <input type='text' value={usn} onChange={e => {setUsn(e.target.value)}}/></li>
                   <li>Password: <input type='password' value={pwd} onChange={e => {setPwd(e.target.value)}}/></li>
@@ -114,7 +114,7 @@ function App() {
             <hr width="1" size="200"/>
             <div>
               <center>
-              <form onClick={e => {e.preventDefault()}} className='container4' id='reg'>
+              <form onClick={e => {e.preventDefault()}} id='reg'>
                 <ul>
                   <li>Username: <input type='text' value={username} onChange={e => {setUsername(e.target.value)}}/></li>
                   <li>Password: <input type='password' value={password} onChange={e => {setPassword(e.target.value)}}/></li>
@@ -172,7 +172,7 @@ function App() {
                 <td id='postInfo'>{element.time + ' ' + element.poster}</td>
               </tr>
               <tr>
-                <td>{'\t' + element.content}</td>
+                <td>        {element.content}</td>
               </tr>
               </tbody>
             );
@@ -187,7 +187,7 @@ function App() {
                   <td id='postInfo'>{element.time + ' ' + element.poster}</td>
                 </tr>
                 <tr>
-                  <td>{'\t' + element.content}</td>
+                  <td>        {element.content}</td>
                 </tr>
                 </tbody>
               );
@@ -199,7 +199,7 @@ function App() {
                   <td id='postInfo'>{element.time + ' ' + element.poster}</td>
                 </tr>
                 <tr>
-                  <td><img src={src} height='200'/></td>
+                  <td>        <img src={src} width='200'/></td>
                 </tr>
                 </tbody>
               )
@@ -224,25 +224,9 @@ function App() {
         </table>
       </div>
       <div className='container2'>
-        <textarea rows={9} value = {msg} onChange={e => {
-          setMSG(e.target.value);
-        }}></textarea>
-        <button onClick={e => {
-          if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
-            fetch(`${dev(devBool)}/api/msg`, {
-              method: 'post',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`
-              },
-              body: JSON.stringify({message: msg, image: false})
-            })
-            .then(res => {setMSG(''); socket.emit('post');})
-            .catch((err)=>{console.log(err)})}
-        }} id='btn1'>  Post  </button>
-        <div>
-          Send Image
-          <input type='file' id='btn1' onChange={e => {
+        <div id='upload'>
+          <label for='upload'>Send Image: </label>
+          <input type='file' id='upload' onChange={e => {
             const image = new FormData();
             image.append('file', e.target.files[0]);
             axios.post(`${dev(devBool)}/api/upload`, image, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`, 'Content-Type': `multipart/form-data`}})
@@ -259,6 +243,22 @@ function App() {
             .catch(err => {console.log(err)});
           }}/>
         </div>
+        <textarea rows={9} value = {msg} onChange={e => {
+          setMSG(e.target.value);
+        }}></textarea>
+        <button onClick={e => {
+          if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
+            fetch(`${dev(devBool)}/api/msg`, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`
+              },
+              body: JSON.stringify({message: msg, image: false})
+            })
+            .then(res => {setMSG(''); socket.emit('post');})
+            .catch((err)=>{console.log(err)})}
+        }} id='btn1'>  Post  </button>
       </div>
     </div>
   );
