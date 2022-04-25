@@ -6,7 +6,7 @@ import socketIOClient from 'socket.io-client';
 
 
 const dev = (bool) => {if (bool){return 'http://localhost:3000'}else{return 'https://ruochen-ait-final.herokuapp.com'}}
-const devBool = true;
+const devBool = false;
 const socket = socketIOClient(dev(devBool));
 
 function App() {
