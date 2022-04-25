@@ -27,7 +27,7 @@ router.get('/msg', (req, res) => {
 
 router.get('/search', async (req, res) => {
     const query = req.query.search;
-    const history = await log.find({"content": {"$regex": query, "$options": "i"}});
+    const history = await log.find({"content": {"$regex": query, "$options": "i"}, image: false});
     res.json(history);
 })
 
