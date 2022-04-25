@@ -224,7 +224,7 @@ function App() {
         </table>
       </div>
       <div className='container2'>
-        <textarea rows={10} value = {msg} onChange={e => {
+        <textarea rows={9} value = {msg} onChange={e => {
           setMSG(e.target.value);
         }}></textarea>
         <button onClick={e => {
@@ -242,7 +242,7 @@ function App() {
         }} id='btn1'>  Post  </button>
         <div>
           Send Image
-          <input type='file' onChange={e => {
+          <input type='file' id='btn1' onChange={e => {
             const image = new FormData();
             image.append('file', e.target.files[0]);
             axios.post(`${dev(devBool)}/api/upload`, image, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`, 'Content-Type': `multipart/form-data`}})
