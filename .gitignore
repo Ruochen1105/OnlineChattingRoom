@@ -7,3 +7,15 @@ npm-debug.log
 .idea/
 tmp/
 log/
+
+**/*.jpg
+**/*.png
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.webp
+**/*.jfif
+**/*.pjpeg
+**/*.pjp
+**/*.avif
+**/*.apng

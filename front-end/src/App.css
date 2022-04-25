@@ -166,3 +166,7 @@ div.vl {
   top: 20px;
   right: 20px;
 }
+
+input[type='file'] {
+  color: transparent;
+}

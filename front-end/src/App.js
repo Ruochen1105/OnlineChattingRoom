@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import socketIOClient from 'socket.io-client';
+import axios from "axios"
 
 
 const dev = (bool) => {if (bool){return 'http://localhost:3000'}else{return 'https://ruochen-ait-final.herokuapp.com'}}
-const devBool = false;
+const devBool = true;
 const socket = socketIOClient(dev(devBool));
 
 function App() {
@@ -179,16 +180,30 @@ function App() {
         </table>
         <table id='msg'>
           {text.map((element, i) => {
-            return (
-              <tbody key={`msg${i}`}>
-              <tr>
-                <td id='postInfo'>{element.time + ' ' + element.poster}</td>
-              </tr>
-              <tr>
-                <td>{'\t' + element.content}</td>
-              </tr>
-              </tbody>
-            );
+            if (!element.image){
+              return (
+                <tbody key={`msg${i}`}>
+                <tr>
+                  <td id='postInfo'>{element.time + ' ' + element.poster}</td>
+                </tr>
+                <tr>
+                  <td>{'\t' + element.content}</td>
+                </tr>
+                </tbody>
+              );
+            } else {
+              const src = `${dev(devBool)}/${element.content}`;
+              return (
+                <tbody key={`msg${i}`}>
+                <tr>
+                  <td id='postInfo'>{element.time + ' ' + element.poster}</td>
+                </tr>
+                <tr>
+                  <td><img src={src} height='200'/></td>
+                </tr>
+                </tbody>
+              )
+            }
           })}
         </table>
         <table id='users'>
@@ -209,9 +224,9 @@ function App() {
         </table>
       </div>
       <div className='container2'>
-      <textarea rows={10} value = {msg} onChange={e => {
-        setMSG(e.target.value);
-      }}></textarea>
+        <textarea rows={10} value = {msg} onChange={e => {
+          setMSG(e.target.value);
+        }}></textarea>
         <button onClick={e => {
           if (msg === '' || msg === undefined) {alert("You can't send nothing!")} else {
             fetch(`${dev(devBool)}/api/msg`, {
@@ -220,11 +235,30 @@ function App() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`
               },
-              body: JSON.stringify({message: msg})
+              body: JSON.stringify({message: msg, image: false})
             })
             .then(res => {setMSG(''); socket.emit('post');})
             .catch((err)=>{console.log(err)})}
         }} id='btn1'>  Post  </button>
+        <div>
+          Send Image
+          <input type='file' onChange={e => {
+            const image = new FormData();
+            image.append('file', e.target.files[0]);
+            axios.post(`${dev(devBool)}/api/upload`, image, {headers: {'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`, 'Content-Type': `multipart/form-data`}})
+            .then(resJson => {
+              fetch(`${dev(devBool)}/api/msg`, {
+                method: 'post',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`
+                },
+                body: JSON.stringify({message: resJson.data.name, image: true})
+              }).then(() => {socket.emit('post');}).catch(err => {console.log(err)});
+            })
+            .catch(err => {console.log(err)});
+          }}/>
+        </div>
       </div>
     </div>
   );

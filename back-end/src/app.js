@@ -13,6 +13,7 @@ const auth = require('./auth');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', '..', 'front-end', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'public', 'images')))
 
 app.use('/api',passport.authenticate('jwt'), api);
 app.use('/auth', auth);
