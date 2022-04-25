@@ -2,13 +2,11 @@
 
 ## Overview
 
-This app allows its users to chat with others over the Internet in chatting rooms (a one-to-one chat is a room with two people). It allows the creator of the chatting room to manage the members, and supports chat history browsing and searching.
+This app allows its users to chat with others in the chatting rooms. It supports chat history browsing and searching as well as sending images.
 
 ## Data Model
 
-The application will store Usersand Logs.
-
-* users can have multiple logs (via references)
+The application will store Users and Logs.
 
 An Example User:
 
@@ -26,7 +24,8 @@ An Example Log:
 {
   content: "foo",
   poster: // a reference to User objects
-  time: "1111-11-11 11:11:11:111"
+  time: "1111-11-11 11:11:11",
+  image: // a boolean to indicate if this log is an image or not
   ]
 }
 ```
@@ -55,6 +54,9 @@ An Example Log:
 4. as a user, I can see others' posts instantly
 5. as a user, I can browse the chat history
 6. as a user, I can search among the chat history
+7. as a user, I can know who's in the room
+8. as a user, I can send images
+9. as a user, I can see images posted by others
 
 ## Research Topics
 
@@ -62,7 +64,7 @@ An Example Log:
     * use Socket.io to "enable low-latency, bidirectional and event-based communication between a client and a server" (from official documents)
     * numerous tutorials available online, which ease the difficulty to learn Socket.io
 
-* (5 points) multer
+* (3 points) multer
     * use multer to enable users to send images to the chat
 
 * (3 points) React.js
@@ -78,7 +80,7 @@ An Example Log:
 * (1 point) MongoDB Atlas
     * I'm going to use MongoDB Atlas
 
-19 points total out of 8 required points (I may not do all of these)
+17 points total out of 8 required points
 
 ## Link to Initial Main Project File[Frontend](./front-end/src/App.js)[Backend](./back-end/src/app.js) 
 
@@ -91,3 +93,4 @@ An Example Log:
 5. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
 6. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
 7. [How To Implement API Authentication with JSON Web Tokens and Passport](https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport)
+8. [How To Upload and Serve Photos Using React, Node, Express](https://dev.to/austinbrownopspark/how-to-upload-and-serve-photos-using-react-node-express-36ii)
