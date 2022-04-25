@@ -62,11 +62,8 @@ An Example Log:
     * use Socket.io to "enable low-latency, bidirectional and event-based communication between a client and a server" (from official documents)
     * numerous tutorials available online, which ease the difficulty to learn Socket.io
 
-* (5 points) Automated functional testing for all of your routes using any of the following:
-    * Selenium
-    * Minimally 4 tests
-    * You'll have to link to testing code in repository
-    * … and show a screen capture of tests
+* (5 points) multer
+    * use multer to enable users to send images to the chat
 
 * (3 points) React.js
     * use React.js as the frontend framework; it's a challenging library to learn, but I won't make many pages, so I've assigned it 3 points
