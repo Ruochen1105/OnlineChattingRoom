@@ -14,7 +14,6 @@ An Example User:
 {
   username: "foo",
   password: // a password hash,
-  posts: //an array of references to Logs objects
 }
 ```
 
@@ -85,11 +84,10 @@ An Example Log:
 
 ## Annotations / References Used
 
-1. [passport.js authentication docs](http://passportjs.org/docs)
-2. [React.js docs](https://reactjs.org/docs/getting-started.html)
-3. [Socket.io documentaion](https://socket.io/docs/v4/)
-4. [Selenium documentation](https://www.selenium.dev/documentation/)
-5. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
-6. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
-7. [How To Implement API Authentication with JSON Web Tokens and Passport](https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport)
-8. [How To Upload and Serve Photos Using React, Node, Express](https://dev.to/austinbrownopspark/how-to-upload-and-serve-photos-using-react-node-express-36ii)
+1. [passport.js authentication docs](http://passportjs.org/docs)[passport.js](./back-end/src/passport.js)[auth.js](./back-end/src/auth.js)
+2. [React.js docs](https://reactjs.org/docs/getting-started.html)[App.js](./front-end/src/App.js)
+3. [Socket.io documentaion](https://socket.io/docs/v4/)[app.js](./back-end/src/app.js)
+4. [Getting Date and Time in Node.js](https://usefulangle.com/post/187/nodejs-get-date-time)
+5. [How to deploy a Reactjs and Express App to Heroku](https://medium.com/@adoolak/how-to-deploy-a-reactjs-and-express-app-to-heroku-afb5b117e0eb)
+6. [How To Implement API Authentication with JSON Web Tokens and Passport](https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport)[passport.js](./back-end/src/passport.js)[app.js](./back-end/src/app.js)
+7. [How To Upload and Serve Photos Using React, Node, Express](https://dev.to/austinbrownopspark/how-to-upload-and-serve-photos-using-react-node-express-36ii)[api.js](./back-end/src/api.js)
