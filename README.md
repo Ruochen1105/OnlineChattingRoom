@@ -1,3 +1,7 @@
+This is my final project for CSCI-UA 467 Applied Internet Technology. I built a full stack web app that allows users to register, login, see online users, send texts and images, recieve other users posts synchronously, and search for history posts.
+
+My tech stack is MERN. Specially, I used MongoDB Atlas. I deployed the app to Heroku, the link is here: [https://ruochen-ait-final.herokuapp.com/](https://ruochen-ait-final.herokuapp.com/). Please note that due to the limitation of Heroku free plan, images uploaded to and stored in the backend in previous active cycles are automatically removed when the app is put into sleep.
+
 # Online Chatting Room
 
 ## Overview
@@ -28,17 +32,19 @@ An Example Log:
 }
 ```
 
-## [Link to Database Connection & Schema](./back-end/src/db.js) 
+## [Link to Database Connection & Schema](./back-end/src/db.js)
+
+## [Link to Authentication](./back-end/src/auth.js)
 
 ## Wireframes
 
-/login - page for login and registration
-
-![list create](documents/login.png)
-
-/home - page where everything happens
+page where everything happens
 
 ![list](documents/homepage.png)
+
+modal for login and registration
+
+![list create](documents/login.png)
 
 ## Site map
 
@@ -49,36 +55,24 @@ An Example Log:
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
 3. as a user, I can post messages in the chat room
-4. as a user, I can see others' posts instantly
+4. as a user, I can see others' posts synchronously
 5. as a user, I can browse the chat history
-6. as a user, I can search among the chat history
+6. as a user, I can search within the chat history
 7. as a user, I can know who's in the room
 8. as a user, I can send images
-9. as a user, I can see images posted by others
+9. as an admin, I want to block non-logged user from online-user list and their posts
 
 ## Research Topics
 
-* (3 points) Socket.io
-    * use Socket.io to "enable low-latency, bidirectional and event-based communication between a client and a server" (from official documents)
-    * numerous tutorials available online, which ease the difficulty to learn Socket.io
+* Socket.io
+    * use Socket.io to "enable low-latency, bidirectional and event-based communication between a client and a server"
 
-* (3 points) multer
-    * use multer to enable users to send images to the chat
+* multer
+    * use multer to handle images uploaded by users
 
-* (3 points) React.js
-    * use React.js as the frontend framework; it's a challenging library to learn, but I won't make many pages, so I've assigned it 3 points
-
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * I'm going to use JsonWebToken for keeping track of user authentication status
-
-* (2 points) Deploy on Heroku 
-    * I'm going to deploy my app on Heroku
-
-* (1 point) MongoDB Atlas
-    * I'm going to use MongoDB Atlas
-
-17 points total out of 8 required points
+* user authentication
+    * use passport for user authentication
+    * use JsonWebToken for keeping track of user authentication status
 
 ## Link to Initial Main Project File[Frontend](./front-end/src/App.js)[Backend](./back-end/src/app.js) 
 
