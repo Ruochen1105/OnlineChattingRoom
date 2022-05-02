@@ -1,6 +1,6 @@
 This is my final project for CSCI-UA 467 Applied Internet Technology. I built a full stack web app that allows users to register, login, see online users, send texts and images, recieve other users posts synchronously, and search for history posts.
 
-My tech stack is MERN. Specially, I used MongoDB Atlas. I deployed the app to Heroku, the link is here: [https://ruochen-ait-final.herokuapp.com/](https://ruochen-ait-final.herokuapp.com/). Please note that due to the limitation of Heroku free plan, images uploaded to and stored in the backend in previous active cycles are automatically removed when the app is put into sleep.
+My tech stack is MERN. Specially, I used MongoDB Atlas, and I deployed the app to Heroku. Link is here: [https://ruochen-ait-final.herokuapp.com/](https://ruochen-ait-final.herokuapp.com/). Please note that due to the limitation of Heroku free plan, images uploaded to and stored in the backend in previous active cycles are automatically removed when the app is put into sleep.
 
 # Online Chatting Room
 
@@ -46,10 +46,6 @@ modal for login and registration
 
 ![list create](documents/login.png)
 
-## Site map
-
-![site map](documents/SiteMap.png)
-
 ## User Stories or Use Cases
 
 1. as non-registered user, I can register a new account with the site
@@ -74,7 +70,11 @@ modal for login and registration
     * use passport for user authentication
     * use JsonWebToken for keeping track of user authentication status
 
-## Link to Initial Main Project File[Frontend](./front-end/src/App.js)[Backend](./back-end/src/app.js) 
+## Link to Initial Main Project File
+
+[Frontend](./front-end/src/App.js)
+
+[Backend](./back-end/src/app.js) 
 
 ## Annotations / References Used
 
